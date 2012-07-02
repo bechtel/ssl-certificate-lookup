@@ -1,0 +1,35 @@
+<p>
+	Lookup SSL certificate details of any secured site.
+</p>
+
+<p>
+	<input type="text" id="q" name="q" class="input input-xlarge search-query" value="https://">	
+	<button id="submit" class="btn btn-primary">Search</button>
+</p>
+
+
+<div id="spinner" style="display:none;"><img src="/ajax-spinner.gif"></div>
+<div id="result"></div>
+
+<script>
+
+$(document).ready(function(){ 
+
+   $("#submit").click(function() {
+
+		$("#spinner").show();
+		$("#result").empty();
+		$("#result").fadeOut("slow", function(){
+		
+		$.get('/lookup', { q: $("#q").val() }, function(data){
+			$("#spinner").hide();
+			$("#result").html(data);
+		});
+	});
+	$("#result").fadeIn("slow");
+   
+   });
+
+});
+
+</script>
